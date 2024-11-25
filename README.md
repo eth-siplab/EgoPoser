@@ -4,6 +4,9 @@
 
 [Sensing, Interaction & Perception Lab](https://siplab.org), Department of Computer Science, ETH Zürich, Switzerland <br/>
 
+[![project page](https://img.shields.io/badge/project_page-siplab_ethz-blue.svg)](https://siplab.org/projects/EgoPoser)
+[![paper download](https://img.shields.io/badge/arxiv-paper-red.svg)](https://arxiv.org/abs/2308.06493)
+
 <p align="center">
 </p>
 
