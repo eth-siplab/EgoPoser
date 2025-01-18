@@ -20,9 +20,53 @@ Method Overview
 
 
 
-Our code is based on our previous project [AvatarPoser (ECCV'22)](https://github.com/eth-siplab/AvatarPoser) and is expected to be released in December.
+Contents
+----------
 
-Bibtex
+* [Datasets](#datasets)
+* [Training](#training)
+* [Testing](#testing)
+* [Pretrained Models](#pretrained-models)
+* [Citation](#citation)
+* [License](#license)
+
+
+
+Datasets
+----------
+We adapt the data processing code from [AvatarPoser](https://github.com/eth-siplab/AvatarPoser) and use the same data split:
+1. Please download the datasets `BMLrub`, `CMU`, and `HDM05` from [AMASS](https://amass.is.tue.mpg.de/index.html).
+2. Download the required body model and placed them in `support_data/body_models` directory of this repository. For SMPL+H body model, download it from http://mano.is.tue.mpg.de/. Please download the AMASS version of the model with DMPL blendshapes. You can obtain dynamic shape blendshapes, e.g. DMPLs, from http://smpl.is.tue.mpg.de
+3. Run `prepare_data.py` to preprocess the input data for faster training. The data split for training and testing data in our paper is stored under the folder `data_split`.
+
+
+Training
+----------
+To train a model with hand tracking signals always available, please run:
+```
+python main_train.py -opt options/train_egoposer.yaml
+```
+
+To train a model with hand tracking, please run:
+```
+python main_train.py -opt options/train_egoposer_handtracking.yaml
+```
+
+Testing
+----------
+For testing, please run one of the following commands:
+```
+python main_test.py -opt options/test_egoposer.yaml	# for full hand visibility
+```
+```
+python main_test.py -opt options/test_egoposer_handtracking.yaml	# for partial hand visibility
+```
+
+Pretrained Models
+----------
+We provide our pre-trained models on [Google Drive](https://drive.google.com/drive/folders/1b0tc4T8z6vasy7AksYlfw--6dWfzH8wT?usp=drive_link) for EgoPoser. Download the models and put them into `model_zoo`.
+
+Citation
 ----------
 
 If you find our paper or codes useful, please cite our work:
@@ -34,6 +78,15 @@ If you find our paper or codes useful, please cite our work:
 	  year={2024},
 	  organization={Springer}
 	}	  
+
+    @inproceedings{jiang2022avatarposer,
+      title={AvatarPoser: Articulated Full-Body Pose Tracking from Sparse Motion Sensing},
+      author={Jiang, Jiaxi and Streli, Paul and Qiu, Huajian and Fender, Andreas and Laich, Larissa and Snape, Patrick and Holz, Christian},
+      booktitle={Proceedings of European Conference on Computer Vision},
+      year={2022},
+      organization={Springer}
+    }
+ 
 
 ## License
 This project is released under the MIT license. Our code is based on our previous project [AvatarPoser (ECCV'22)](https://github.com/eth-siplab/AvatarPoser).
