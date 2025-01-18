@@ -1,0 +1,5 @@
+support_data/
+results/
+data_amass_avatarposer_split/
+__pycache__/
+*.zip
