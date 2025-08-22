@@ -92,7 +92,7 @@ for dataroot_subset in ["MPI_HDM05", "BioMotionLab_NTroje", "CMU"]:
 
             body_parms_list = body_parms
 
-            body_pose_world=bm(**{k:v for k,v in body_parms.items() if k in ['pose_body','root_orient','trans','betas']})
+            body_pose_world=bm(**{k:v for k,v in body_parms.items() if k in ['pose_body','root_orient','trans']})
 
             output_aa = torch.Tensor(bdata_poses[:, :66]).reshape(-1,3)
             output_6d = utils_transform.aa2sixd(output_aa).reshape(bdata_poses.shape[0],-1)

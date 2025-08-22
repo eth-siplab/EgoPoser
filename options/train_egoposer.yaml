@@ -27,7 +27,7 @@ datasets:
     name: train_dataset
     dataset_type: amass
     dataroot:
-      - ../EgoPoser/data_amass_avatarposer_split_meanshape/train/*/*
+      - ../EgoPoser/data_amass_avatarposer_split/train/*/*
     dataloader_shuffle: true
     dataloader_num_workers: 4
     dataloader_batch_size: 64
@@ -41,7 +41,7 @@ datasets:
     name: test_dataset
     dataset_type: amass
     dataroot:
-      - ../EgoPoser/data_amass_avatarposer_split_meanshape/test/*/*
+      - ../EgoPoser/data_amass_avatarposer_split/test/*/*
     dataloader_batch_size: 1
     num_input: 3
     full_hand_visibility: true    # when set to true, the fov values below will be ignored
