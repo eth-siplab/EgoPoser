@@ -46,10 +46,12 @@ class AvatarNet(nn.Module):
 
         if self.spatial_normalization:
             # spatial normalization, make horizontal positions relative to the head
-            input_tensor[...,36:38] = input_tensor[...,36:38] - input_tensor[...,36:38]
-            input_tensor[...,39:41] = input_tensor[...,39:41] - input_tensor[...,36:38]
-            input_tensor[...,42:44] = input_tensor[...,42:44] - input_tensor[...,36:38]
-
+            
+            head_horizontal_trans = input_tensor.clone()[...,36:38].detach()
+            input_tensor[...,36:38] -= head_horizontal_trans
+            input_tensor[...,39:41] -= head_horizontal_trans
+            input_tensor[...,42:44] -= head_horizontal_trans            
+            
         x = self.linear_embedding(input_tensor)
         x = x.permute(1,0,2)
         x = self.transformer_encoder(x)
