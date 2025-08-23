@@ -108,7 +108,7 @@ class AMASS_Dataset(Dataset):
 
             return {'sparse': input_hmd[::sample_stride],
                     'poses_gt': output_gt[::sample_stride],
-                    'betas_gt': np.repeat(betas[::sample_stride][np.newaxis], repeats=self.window_size, axis=0),
+#                    'betas_gt': np.repeat(betas[::sample_stride][np.newaxis], repeats=self.window_size, axis=0),
                     'fov_l':lefthand_in_fov[::sample_stride],
                     'fov_r':  righthand_in_fov[::sample_stride],
                     'head_trans4x4_global':head_global_trans_list[[frame + self.window_size -1],...],
@@ -147,7 +147,7 @@ class AMASS_Dataset(Dataset):
 
             return {'sparse': input_hmd,
                     'poses_gt': output_gt,
-                    'betas_gt': np.repeat(betas[np.newaxis], repeats=input_hmd.shape[0], axis=0),
+#                    'betas_gt': np.repeat(betas[np.newaxis], repeats=input_hmd.shape[0], axis=0),
                     'fov_l':lefthand_in_fov,
                     'fov_r':  righthand_in_fov,
                     'head_trans4x4_global':head_global_trans_list[0:],
