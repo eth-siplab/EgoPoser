@@ -38,7 +38,7 @@ We adapt the data processing code from [AvatarPoser](https://github.com/eth-sipl
 1. Please download the datasets `BMLrub`, `CMU`, and `HDM05` from [AMASS](https://amass.is.tue.mpg.de/index.html).
 2. Download the required body model and placed them in `support_data/body_models` directory of this repository. For SMPL+H body model, download it from http://mano.is.tue.mpg.de/. Please download the AMASS version of the model with DMPL blendshapes. You can obtain dynamic shape blendshapes, e.g. DMPLs, from http://smpl.is.tue.mpg.de
 3. Run `prepare_data.py` to preprocess the input data for faster training. The data split for training and testing data in our paper is stored under the folder `data_split`.
-
+4. If you want to test the performance on the HPS dataset, please first download the dataset by clicking on ["HPS result"](https://edmond.mpg.de/file.xhtml?fileId=274749) from [HPS Dataset Website](https://virtualhumans.mpi-inf.mpg.de/hps/download_and_license.html), and then run `prepare_data_hps.py` to preprocess the data.
 
 Training
 ----------
@@ -52,6 +52,11 @@ To train a model with hand tracking, please run:
 python main_train.py -opt options/train_egoposer_handtracking.yaml
 ```
 
+To train a model for the HPS dataset (30 FPS), please run
+```
+python main_train.py -opt options/train_egoposer_30fps.yaml
+```
+
 Testing
 ----------
 For testing, please run one of the following commands:
@@ -61,7 +66,9 @@ python main_test.py -opt options/test_egoposer.yaml	# for full hand visibility
 ```
 python main_test.py -opt options/test_egoposer_handtracking.yaml	# for partial hand visibility
 ```
-
+```
+python main_test.py -opt options/test_egoposer_hps.yaml	# for HPS dataset
+```
 Pretrained Models
 ----------
 We provide our pre-trained models on [Google Drive](https://drive.google.com/drive/folders/1b0tc4T8z6vasy7AksYlfw--6dWfzH8wT?usp=drive_link) for EgoPoser. Download the models and put them into `model_zoo`.
