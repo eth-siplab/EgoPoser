@@ -23,6 +23,7 @@ Method Overview
 Contents
 ----------
 
+* [Installation](#installation)
 * [Datasets](#datasets)
 * [Training](#training)
 * [Testing](#testing)
@@ -30,7 +31,25 @@ Contents
 * [Citation](#citation)
 * [License](#license)
 
+Installation
+----------
+1. Clone this project.
+```
+git clone https://github.com/eth-siplab/EgoPoser
+```
 
+2. Environment
+
+You can install the conda environment by:
+```
+conda env create -f environment.yml
+conda activate egoposer
+```
+or through pip:
+```
+pip install -r requirements.txt
+```
+We test our code on Python 3.10.0.
 
 Datasets
 ----------
