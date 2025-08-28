@@ -1,13 +1,12 @@
-task: egoposer_handtracking
+task: egoposer_30fps
 gpu_ids:
   - 0
 model: egoposer
 test_mode: true       # true for testing, false for training
 test_small: false
 test_keywords: 0030_scamper_poses # keywords for testing, work when test_mode is true
-pretrained_model: model_zoo/egoposer_handtracking.pth
-init_iter: false #false #110000 
-print_all: false
+init_iter: 10000 #false #110000 
+print_all: true
 save:
   save_animation: false
   save_smpl: false
@@ -33,12 +32,12 @@ datasets:
     dataloader_num_workers: 4
     dataloader_batch_size: 64
     num_input: 3
-    full_hand_visibility: false    # when set to true, the fov values below will be ignored
+    full_hand_visibility: true    # when set to true, the fov values below will be ignored
     fov_h: 120
     fov_v: 120
     window_size: 80
     offset: 0
-    sample_stride: 1
+    sample_stride: 2
   test:
     name: test_dataset
     dataset_type: amass
@@ -46,11 +45,11 @@ datasets:
       - ./data_amass_avatarposer_split/test/*/*
     dataloader_batch_size: 1
     num_input: 3
-    full_hand_visibility: false    # when set to true, the fov values below will be ignored
+    full_hand_visibility: true    # when set to true, the fov values below will be ignored
     fov_h: 120
     fov_v: 120
     window_size: 80
-    test_batch: 1000
+    test_batch: 200
     offset: 0
     sample_stride: 1
 body_model:
@@ -67,7 +66,7 @@ train:
   lossfn_type: l1
   global_orientation_weight: 0.02
   joint_rotation_weight: 1
-  joint_position_weight: 20
+  joint_position_weight: 1
   shape_weight: 0.01
   optimizer_type: adam
   optimizer_lr: 0.0001
@@ -84,5 +83,5 @@ train:
   regularizer_orthstep: null
   regularizer_clipstep: null
   checkpoint_test: 5000
-  checkpoint_save: 10000
+  checkpoint_save: 5000
   checkpoint_print: 500

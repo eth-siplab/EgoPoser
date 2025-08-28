@@ -1,11 +1,10 @@
-task: egoposer_handtracking
+task: egoposer_handtracking_large
 gpu_ids:
   - 0
 model: egoposer
-test_mode: true       # true for testing, false for training
+test_mode: false       # true for testing, false for training
 test_small: false
 test_keywords: 0030_scamper_poses # keywords for testing, work when test_mode is true
-pretrained_model: model_zoo/egoposer_handtracking.pth
 init_iter: false #false #110000 
 print_all: false
 save:
@@ -14,9 +13,9 @@ save:
 net:
   network_name: egoposer
   network_arguments:
-    num_layer: 3
+    num_layer: 6
     input_dim: 60
-    embed_dim: 256
+    embed_dim: 512
     nhead: 8
     spatial_normalization: true    # true for indoor (e.g., AMASS) and false for outdoor large-scenes (e.g., HPS)
     shape_estimation: false     # true for shape estimation, false for using mean shape
@@ -50,7 +49,7 @@ datasets:
     fov_h: 120
     fov_v: 120
     window_size: 80
-    test_batch: 1000
+    test_batch: 200
     offset: 0
     sample_stride: 1
 body_model:

@@ -30,6 +30,8 @@ class AMASS_Dataset(Dataset):
         dataroot_list = opt['dataroot']
         self.offset= opt['offset']
         self.full_hand_visibility = opt['full_hand_visibility']
+        self.sample_stride = opt['sample_stride']
+
 
         if self.opt['phase'] == 'train':
             self.filename_list = []
@@ -75,7 +77,7 @@ class AMASS_Dataset(Dataset):
         hmd_position_global_full_gt_list = data['hmd_position_global_full_gt_list']
         head_global_trans_list = data['head_global_trans_list']
         root_trans = data['trans']
-        betas = data['betas']
+        betas = data['betas'] if 'betas' in data.keys() else None
 
         if self.opt['phase'] == 'train':
             
@@ -102,15 +104,12 @@ class AMASS_Dataset(Dataset):
                 lefthand_in_fov = torch.ones(lefthand_in_fov.shape, dtype=torch.bool)   # disable fov
                 righthand_in_fov = torch.ones(righthand_in_fov.shape, dtype=torch.bool)  # disable fov
 
-            sample_stride = 1
 
-
-
-            return {'sparse': input_hmd[::sample_stride],
-                    'poses_gt': output_gt[::sample_stride],
-#                    'betas_gt': np.repeat(betas[::sample_stride][np.newaxis], repeats=self.window_size, axis=0),
-                    'fov_l':lefthand_in_fov[::sample_stride],
-                    'fov_r':  righthand_in_fov[::sample_stride],
+            return {'sparse': input_hmd[::self.sample_stride],
+                    'poses_gt': output_gt[::self.sample_stride],
+#                    'betas_gt': np.repeat(betas[::self.sample_stride][np.newaxis], repeats=self.window_size, axis=0),
+                    'fov_l':lefthand_in_fov[::self.sample_stride],
+                    'fov_r':  righthand_in_fov[::self.sample_stride],
                     'head_trans4x4_global':head_global_trans_list[[frame + self.window_size -1],...],
                     'root_trans':root_trans[[frame + self.window_size - 1],...],
                     'offset': self.offset,
